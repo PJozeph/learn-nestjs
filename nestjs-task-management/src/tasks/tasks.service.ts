@@ -59,23 +59,15 @@ export class TasksService {
 
   deleteTaskById(id: string): Task {
     const found = this.getTaskById(id);
-    if (!found) {
-      throw new NotFoundException('Task not found');
-    } else {
-      this.tasks = this.tasks.filter((task) => task.id !== id);
-      return found;
-    }
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+    return found;
   }
 
   updateTask(id: string, updateDto: UpdateTaskDto): Task {
     const { status } = updateDto;
     const task = this.getTaskById(id);
-    if (!task) {
-      throw new NotFoundException('Task not found');
-    } else {
-      task.status = status;
-      return task;
-    }
+    task.status = status;
+    return task;
   }
 
   createTask(createTaskDto: CreateTaskDto): Task {
